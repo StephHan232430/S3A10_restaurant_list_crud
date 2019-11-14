@@ -1,73 +1,75 @@
-<form method="POST" action="/restaurants">
-  <h1 class="mb-1 restaurant-show-title">餐廳名：
-    <input type="text" name="name">
-  </h1>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-10 mx-auto text-center">
+<form id="create" method="POST" action="/restaurants">
+  <div class="form-group">
+    <h1 class="mb-1 restaurant-show-title">餐廳名：
+      <input type="text" name="name" required>
+    </h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-10 mx-auto text-center">
 
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-utensils pr-2"></i>
-            類別：
-            <input type="text" name="category">
-          </span>
-        </p>
+          <p class="mb-1">
+            <span class="text-secondary">
+              <i class="fas fa-utensils pr-2"></i>
+              類別：
+              <input class="col-3" type="text" name="category" required>
+            </span>
+          </p>
 
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-mobile-alt pr-2"></i>
-            圖片：
-            <input type="text" name="image">
-          </span>
-        </p>
+          <p class="mb-1">
+            <span class="text-secondary">
+              <i class="fas fa-mobile-alt pr-2"></i>
+              圖片：
+              <input class="col-3" type="url" name="image" required>
+            </span>
+          </p>
 
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-map-marker-alt pr-2"></i>
-            地址：
-            <input type="text" name="location">
-          </span>
-        </p>
+          <p class="mb-1">
+            <span class="text-secondary">
+              <i class="fas fa-map-marker-alt pr-2"></i>
+              地址：
+              <input class="col-3" type="text" name="location" required>
+            </span>
+          </p>
 
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-location-arrow pr-1 fa-xs"></i>
-            地圖：
-            <input type="text" name="google_map">
-          </span>
-        </p>
+          <p class="mb-1">
+            <span class="text-secondary">
+              <i class="fas fa-location-arrow pr-1 fa-xs"></i>
+              地圖：
+              <input class="col-3" type="url" name="google_map" required>
+            </span>
+          </p>
 
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-mobile-alt pr-2"></i>
-            電話：
-            <input type="text" name="phone">
-          </span>
-        </p>
+          <p class="mb-1">
+            <span class="text-secondary">
+              <i class="fas fa-mobile-alt pr-2"></i>
+              電話：
+              <input class="col-3" type="tel" name="phone" required>
+            </span>
+          </p>
 
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-star mr-1 fa-xs"></i>
-            評分：
-            <input type="number" name="rating" step="0.05">
-          </span>
-        </p>
+          <p class="mb-1">
+            <span class="text-secondary">
+              <i class="fas fa-star mr-1 fa-xs"></i>
+              評分：
+              <input class="col-3" type="number" min="0" max="5" name="rating" step="0.05" required>
+            </span>
+          </p>
 
-        <p class="mb-5">
-          <span class="text-secondary">
-            <i class="fas fa-info pr-2"></i>
-            描述：
-            <input type="text" name="description">
-          </span>
-        </p>
+          <p class="mb-5">
+            <span class="text-secondary">
+              <i class="fas fa-info pr-2"></i>
+              描述：
+              <input class="col-3" type="text" name="description">
+            </span>
+          </p>
 
-        <a class="btn btn-secondary mr-5" href="/" role="button">Cancel</a>
-        <button class="btn btn-success" type="submit">
-          <i class="far fa-plus-square pr-2"></i>
-          <a href="/restaurants"></a>
-          Create
-        </button>
+          <a class="btn btn-secondary mr-5" href="/" role="button">Cancel</a>
+          <button class="btn btn-success" type="submit">
+            <i class="far fa-plus-square pr-2"></i>
+            <a href="/restaurants"></a>
+            Create
+          </button>
+        </div>
       </div>
     </div>
   </div>

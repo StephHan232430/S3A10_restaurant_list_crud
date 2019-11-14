@@ -4,7 +4,7 @@
     <div class="card-body">
       <h5 class="card-title">
         取消刪除請按
-        <a href="/restaurants/{{{restaurant.id}}}" class="btn btn-secondary">Cancel</a>
+        <a href="{{{backURL}}}" class="btn btn-secondary">Cancel</a>
         ，確認刪除請按
         <form method="POST" action="/restaurants/{{{restaurant.id}}}/delete" style="display: inline;">
           <button class="btn btn-danger mr-5" type="submit">
@@ -15,24 +15,3 @@
     </div>
   </div>
 </div>
-
-{{!-- <div class="modal-dialog modal-dialog-centered" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="alert-title">確定要刪除{{{restaurant.name}}}嗎？</h5>
-    </div>
-    <div class="modal-body">
-      放棄刪除請按Cancel，確認刪除請按Confirm。
-    </div>
-
-  </div>
-</div>
-
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-  <form method="POST" action="/restaurants/{{{restaurant.id}}}/delete" style="display: inline;">
-    <button class="btn btn-danger" type="submit">
-      Confirm
-    </button>
-  </form>
-</div> --}}

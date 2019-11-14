@@ -63,6 +63,7 @@ app.post('/restaurants', (req, res) => {
     rating: req.body.rating,
     description: req.body.description
   })
+
   // 存入資料庫
   restaurant.save(err => {
     if (err) return console.error(err)
@@ -78,16 +79,31 @@ app.get('/restaurants/:id', (req, res) => {
   })
 })
 
-// 修改restaurant頁面
-app.get('/restaurants/:id/edit', (req, res) => {
+// detail頁面的restaurant修改頁面
+app.get('/restaurants/:id/detail_edit', (req, res) => {
+  const backURL = req.headers.referer
   Restaurant.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
-    return res.render('edit', { restaurant })
+    return res.render('detail_edit', { restaurant, backURL })
   })
 })
 
-// 修改restaurant
+// index頁面的restaurant修改頁面
+app.get('/restaurants/:id/index_edit', (req, res) => {
+  const backURL = req.headers.referer
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('index_edit', { restaurant, backURL })
+  })
+})
+
+// 以session紀錄進入編輯模式的路徑，修改restaurant後，依session的記錄代號重導向至對應頁面
 app.post('/restaurants/:id', (req, res) => {
+  if (req.headers.referer.includes('detail')) {
+    req.session = 1
+  } else if (req.headers.referer.includes('index')) {
+    req.session = 0
+  }
   Restaurant.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
@@ -99,17 +115,23 @@ app.post('/restaurants/:id', (req, res) => {
     restaurant.rating = req.body.rating
     restaurant.description = req.body.description
     restaurant.save(err => {
-      if (err) return console.error(err)
-      return res.redirect(`/restaurants/${req.params.id}`)
+      if (err) {
+        return console.error(err)
+      } else if (req.session === 1) {
+        return res.redirect(`/restaurants/${restaurant.id}`)
+      } else if (req.session === 0) {
+        return res.redirect('/')
+      }
     })
   })
 })
 
 // 確認刪除restaurant頁面
 app.get('/restaurants/:id/delete', (req, res) => {
+  const backURL = req.headers.referer
   Restaurant.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
-    return res.render('warning', { restaurant })
+    return res.render('warning', { restaurant, backURL })
   })
 })
 
@@ -133,10 +155,6 @@ app.get('/search', (req, res) => {
     })
     res.render('index', { restaurants: matchedRestaurants, keyword })
   })
-  // const matchedRestaurants = restaurantList.results.filter(item => {
-  //   return item.name.toLowerCase().includes(keyword.toLowerCase()) || item.category.toLowerCase().includes(keyword.toLowerCase())
-  // })
-  // res.render('index', { restaurants: matchedRestaurants, keyword: keyword })
 })
 
 // 啟動並監聽伺服器
